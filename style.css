@@ -44,26 +44,22 @@ footer { border-top: 1px solid var(--line); padding-block: 22px 40px; color: var
 .hero p { max-width: 36rem; }
 .hero .hero-note { margin-top: 14px; font-weight: 800; color: #ffe2b8; opacity: 1; }
 main > .gallery { padding-top: 6px; }
-.gallery-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-.gallery-head h2 { margin-bottom: 2px; }
-.gallery-head p { margin: 0; }
-.g-arrows { display: none; gap: 8px; flex-shrink: 0; }
-.g-arrow { width: 42px; height: 42px; padding: 0; border-radius: 50%; background: var(--card); color: var(--ink); border: 1px solid var(--line); font-size: 24px; line-height: 1; }
-@media (hover: hover) and (min-width: 700px) { .g-arrows { display: flex; } }
-/* the screens, side by side; the list runs edge to edge but starts in line with the text */
+.gallery .wrap { max-width: 64rem; } /* the heading lines up with the grid */
+.gallery h2 { margin-bottom: 2px; }
+.gallery p { margin: 0; }
+/* the screens in rows of four, the last two centred; two to a row on phones */
 .shots {
-  --edge: max(20px, env(safe-area-inset-left, 0px), (100vw - 44rem) / 2 + 20px);
-  list-style: none; margin: 18px 0 0; padding: 4px var(--edge) 18px;
-  display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge);
-  scrollbar-width: thin; overscroll-behavior-x: contain;
+  list-style: none; margin: 22px auto 0; max-width: 64rem;
+  padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px));
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 18px;
 }
-.shots li { flex: 0 0 clamp(200px, 62vw, 236px); scroll-snap-align: start; display: flex; flex-direction: column; gap: 4px; }
-.shots img { width: 100%; height: auto; aspect-ratio: 390 / 844; border-radius: 26px; border: 1px solid var(--line); background: var(--card);
+.shots li { flex: 0 0 calc((100% - 3 * 18px) / 4); min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 760px) { .shots li { flex-basis: calc((100% - 18px) / 2); } }
+.shots img { width: 100%; height: auto; aspect-ratio: 390 / 844; border-radius: 22px; border: 1px solid var(--line); background: var(--card);
   box-shadow: 0 1px 2px rgba(31, 45, 43, .06), 0 14px 30px -18px rgba(31, 45, 43, .45); margin-bottom: 8px; }
-.shots b { font-size: 16.5px; font-weight: 900; }
-.shots li > span:last-child { font-size: 15px; line-height: 1.45; color: var(--dim); }
-.shots .tag { align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
-.small-note { font-size: 14px; margin-top: 0; margin-bottom: 0; }
+.shots b { font-size: 16px; font-weight: 900; line-height: 1.3; }
+.shots li > span:last-child { font-size: 14.5px; line-height: 1.45; color: var(--dim); }
+.shots .tag { align-self: flex-start; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
 .features { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 14px; }
 .features li { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
 .features span { color: var(--dim); font-size: 15.5px; line-height: 1.5; }

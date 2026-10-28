@@ -21,17 +21,11 @@
 
   <main>
     <section class="gallery" aria-labelledby="g-title">
-      <div class="wrap gallery-head">
-        <div>
-          <h2 id="g-title">A look inside</h2>
-          <p class="dim">Swipe through the first few screens and the app itself.</p>
-        </div>
-        <div class="g-arrows">
-          <button type="button" class="g-arrow" data-dir="-1" aria-label="Previous screens">‹</button>
-          <button type="button" class="g-arrow" data-dir="1" aria-label="Next screens">›</button>
-        </div>
+      <div class="wrap">
+        <h2 id="g-title">A look inside</h2>
+        <p class="dim">The first few screens, then the app itself.</p>
       </div>
-      <ol class="shots" id="shots">
+      <ol class="shots">
         <li><span class="tag">Getting started</span><img src="shot-onb-welcome.webp" width="390" height="844" alt="Welcome screen: Pip flying over a dawn sky, with the tagline 'Every step you take flies Pip a little further around the world'">
           <b>Welcome</b><span>Pip sets off from a dawn sky over Alaska.</span></li>
         <li><span class="tag">Getting started</span><img src="shot-onb-pip.webp" width="390" height="844" alt="Meet Pip: a bar-tailed godwit on the tundra, with a fact about the record non-stop flight" loading="lazy">
@@ -53,7 +47,6 @@
         <li><span class="tag">In the app</span><img src="shot-journal.webp" width="390" height="844" alt="Trip journal: polaroid photos from walks, each with a handwritten caption and Pip's stamp" loading="lazy">
           <b>Trip journal</b><span>Photos from your walks, stamped with where Pip was that day.</span></li>
       </ol>
-      <p class="wrap dim small-note">Screens show demo progress and made-up friends.</p>
     </section>
 
     <div class="wrap">
@@ -80,11 +73,5 @@
   <footer>
     <div class="wrap links"><a href="privacy.html">Privacy Policy</a><a href="delete-account.html">Delete your account</a><a href="mailto:journeywithpip@gmail.com">Contact</a></div>
   </footer>
-  <script>
-    // arrow buttons scroll the gallery by about a screenful of cards
-    const shots = document.getElementById('shots');
-    document.querySelectorAll('.g-arrow').forEach(b => b.addEventListener('click', () =>
-      shots.scrollBy({ left: Number(b.dataset.dir) * shots.clientWidth * 0.8, behavior: 'smooth' })));
-  </script>
 </body>
 </html>
