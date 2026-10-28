@@ -1,0 +1,39 @@
+/* Pip's Journey public pages: the app's dawn sky up top, then plain reading pages */
+@font-face { font-family: 'Nunito'; src: url(nunito.woff2) format('woff2'); font-weight: 200 1000; font-display: swap; }
+@font-face { font-family: 'Pixelify Sans'; src: url(pixelify-700.woff2) format('woff2'); font-weight: 700; font-display: swap; }
+:root {
+  --bg: #fbf8f3; --card: #ffffff; --ink: #1f2d2b; --dim: #5d6b68; --line: #e6e0d6;
+  --teal: #1f8a70; --sky: #203c5c; --dawn: #f6c79a; --danger: #c0473b;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141c22; --card: #1c262e; --ink: #edf1ef; --dim: #a6b3b0; --line: #2c3842; --teal: #5cc7a6; --danger: #ef8a7f; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+header { background: linear-gradient(#203c5c, #3d5d83 55%, #8e6f8f); color: #fff; padding: 36px 0 30px; }
+.wrap { max-width: 44rem; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font: 700 22px 'Pixelify Sans', 'Nunito', sans-serif; letter-spacing: .02em; }
+.brand img { width: 56px; height: 56px; image-rendering: pixelated; }
+header h1 { font-size: clamp(28px, 6vw, 38px); line-height: 1.15; margin: 22px 0 6px; font-weight: 900; text-wrap: balance; }
+header p { margin: 0; color: #fff; opacity: .92; }
+main { padding-block: 28px 56px; }
+h2 { font-size: 21px; font-weight: 900; margin: 34px 0 8px; text-wrap: balance; }
+h3 { font-size: 17px; font-weight: 800; margin: 20px 0 4px; }
+p, li { color: var(--ink); }
+ul { padding-left: 1.2em; }
+li { margin: 4px 0; }
+a { color: var(--teal); font-weight: 700; }
+.updated { color: var(--dim); font-size: 15px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 18px 0; }
+.card h2 { margin-top: 0; }
+ol.steps { padding-left: 1.3em; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; color: var(--dim); font-size: 15px; margin: 12px 0; }
+input, textarea { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%; }
+input:focus, textarea:focus { outline: 2px solid var(--teal); outline-offset: -1px; }
+button { font: inherit; font-weight: 800; border: 0; border-radius: 999px; padding: 13px 22px; background: var(--danger); color: #fff; cursor: pointer; }
+button:disabled { opacity: .6; cursor: default; }
+.status { font-weight: 700; min-height: 1.6em; }
+.status.ok { color: var(--teal); }
+.status.err { color: var(--danger); }
+.links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+footer { border-top: 1px solid var(--line); padding-block: 22px 40px; color: var(--dim); font-size: 15px; }

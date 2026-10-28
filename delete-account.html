@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Delete Your Account · Pip's Journey</title>
+  <meta name="description" content="How to delete your Pip's Journey account and its data.">
+  <link rel="icon" href="pip.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./"><img src="pip.png" alt="">Pip's Journey</a>
+      <h1>Delete your account</h1>
+      <p>How to delete your Pip's Journey account and everything saved with it.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <h2>What gets deleted</h2>
+    <p>Your account (email and sign-in), the cloud backup of Pip's progress (step history, workouts, journey,
+      postcards, outfits, medals and trip journal photos), your friend code and nickname, your friendships,
+      cheers and shared flights. Copies in the database provider's routine backups expire within 30 days.
+      Feedback you sent is kept but no longer linked to your account; ask if you'd like it deleted too.</p>
+    <p>Progress saved on your phone is not touched: clear it with <b>Settings → Reset everything</b>, or
+      uninstall the app.</p>
+
+    <div class="card">
+      <h2>In the app (fastest)</h2>
+      <ol class="steps">
+        <li>Open Pip's Journey and sign in, if you aren't already.</li>
+        <li>Go to the <b>Me</b> tab and tap the gear for <b>Settings</b>.</li>
+        <li>Under <b>Account</b>, tap <b>Delete account</b>, then <b>Delete my account</b> twice to confirm.</li>
+      </ol>
+      <p>Your account and its data are deleted straight away.</p>
+    </div>
+
+    <div class="card">
+      <h2>Without the app</h2>
+      <p>Send a request with the email address of your account. We'll email that address to confirm it's yours,
+        then delete the account and its data within 30 days.</p>
+      <form id="req">
+        <label>Your account's email<input id="email" type="email" autocomplete="email" required maxlength="320"></label>
+        <label>Anything we should know (optional)<textarea id="note" rows="3" maxlength="1000"></textarea></label>
+        <button id="send" type="submit">Request deletion</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+      <p>Or email <a href="mailto:journeywithpip@gmail.com">journeywithpip@gmail.com</a> from your account's address.</p>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap links"><a href="./">Pip's Journey</a><a href="privacy.html">Privacy Policy</a><a href="mailto:journeywithpip@gmail.com">Contact</a></div>
+  </footer>
+  <script>
+    // the request lands in the app's feedback table (supabase/launch.sql) as a "delete-request"; the key is
+    // the app's public one, which can only add messages, never read them
+    const SUPABASE = 'https://xuaolxqmotaytuojfxlx.supabase.co', KEY = 'sb_publishable_ofRMKVYnFPUyhH1-1Pyt_w_UhgM1ATS';
+    const form = document.getElementById('req'), status = document.getElementById('status'), send = document.getElementById('send');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim(), note = document.getElementById('note').value.trim();
+      send.disabled = true; status.className = 'status'; status.textContent = 'Sending…';
+      try {
+        const res = await fetch(`${SUPABASE}/rest/v1/feedback`, {
+          method: 'POST',
+          headers: { apikey: KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify({ kind: 'delete-request', email, message: note || 'Please delete my account.', app: 'website' }),
+        });
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        status.className = 'status ok'; status.textContent = "Request sent. We'll email you to confirm.";
+      } catch (err) {
+        status.className = 'status err'; status.textContent = "Couldn't send that. Try again, or email us instead.";
+      }
+      send.disabled = false;
+    });
+  </script>
+</body>
+</html>
