@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Add a Friend · Pip's Journey</title>
+  <meta name="description" content="A friend invited you to walk the world together on Pip's Journey.">
+  <link rel="icon" href="pip.png">
+  <link rel="stylesheet" href="style.css?v=2">
+  <style>
+    .invite { text-align: center; }
+    .code { display: inline-block; margin: 6px 0 4px; padding: 10px 22px; border: 2px dashed var(--line); border-radius: 14px;
+      font: 800 34px/1.1 'Nunito', system-ui, sans-serif; letter-spacing: .14em; color: var(--ink); background: var(--bg); }
+    .go { display: block; margin: 18px auto 10px; max-width: 320px; padding: 14px 22px; border-radius: 999px; background: var(--teal);
+      color: #fff; font-weight: 800; text-decoration: none; }
+    .go.ghost { background: none; color: var(--teal); border: 2px solid var(--teal); margin-top: 0; }
+    .small { font-size: 15px; color: var(--dim); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./"><img src="pip.png" alt="">Pip's Journey</a>
+      <h1>Walk the world together</h1>
+      <p>A friend invited you to Pip's Journey, the walking app where your steps fly a little bird around the world.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="card invite">
+      <p class="small" id="lead">Their friend code</p>
+      <div class="code" id="code">······</div>
+      <a class="go" id="open" href="#">Add them in the app</a>
+      <a class="go ghost" href="https://play.google.com/store/apps/details?id=com.journeywithpip.pipsjourney">Get Pip's Journey on Google Play</a>
+      <p class="small" id="how">Already have the app? Sign in, open the <b>Friends</b> tab, tap <b>+</b> and type in the code.</p>
+    </div>
+    <p class="small">Pip's Journey is in early testing on Android. If Google Play says the app isn't available,
+      ask your friend for the tester link first.</p>
+  </main>
+  <footer>
+    <div class="wrap links"><a href="./">Pip's Journey</a><a href="privacy.html">Privacy Policy</a><a href="mailto:journeywithpip@gmail.com">Contact</a></div>
+  </footer>
+  <script>
+    // the friend code comes in the link: add.html?c=ABC123
+    const code = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const ok = /^[A-Z0-9]{6}$/.test(code), open = document.getElementById('open');
+    if (ok) document.getElementById('code').textContent = code;
+    else { document.getElementById('lead').textContent = 'This invite link is missing its friend code.'; open.hidden = true; }
+    // on Android, Chrome opens the app straight on the add-friend sheet, or Google Play when it isn't installed
+    const play = 'https://play.google.com/store/apps/details?id=com.journeywithpip.pipsjourney';
+    if (ok && /android/i.test(navigator.userAgent)) {
+      open.href = `intent://friend/${code}#Intent;scheme=com.pipsjourney.app;package=com.journeywithpip.pipsjourney;S.browser_fallback_url=${encodeURIComponent(play)};end`;
+    } else if (ok) {
+      open.hidden = true; // the app is Android only, so there's nothing to open here
+      document.getElementById('how').insertAdjacentHTML('afterbegin', 'Pip\'s Journey is on Android for now. ');
+    }
+  </script>
+</body>
+</html>
