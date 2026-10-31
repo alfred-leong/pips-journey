@@ -17,7 +17,7 @@
     </div>
   </header>
   <main class="wrap">
-    <p class="updated">Last updated 28 October 2026</p>
+    <p class="updated">Last updated 31 October 2026</p>
 
     <p>Pip's Journey is a walking app: a pixel-art godwit called Pip flies around the world on your steps.
       This policy explains what the app reads, what it stores, where, and how to delete it.
@@ -39,8 +39,10 @@
         between countries, it also remembers when each check happened and the phone's time zone then, for
         two weeks. Coordinates are never stored or sent anywhere. You can turn the Passport off at any time, and remove location access in your phone's
         settings.</li>
-      <li><b>Notifications</b>, only if you turn on daily treat reminders. They're scheduled on your phone
-        for 8am and 8pm; nothing is sent from a server, and turning them off in Settings cancels them.</li>
+      <li><b>Notifications</b>, only if you allow them: daily treat reminders, and a note when your steps earn
+        a medal, an outfit or bring Pip to a new stop. Both are worked out and shown on your phone. If you have an
+        account, friends' news too: when a friend adds you, cheers you on or wants to fly together. Those come from
+        our server through Firebase (see below). Each kind can be turned off in Settings.</li>
     </ul>
     <p>The app does not use your contacts, microphone or advertising ID. Pip's position on the map is Pip's
       flight, worked out from your step count, not where you are.</p>
@@ -58,8 +60,10 @@
       <li>A <b>backup of your progress</b>: the same things the app saves on your phone, including daily step
         counts, workouts, the countries your Passport counted steps in, and your trip journal photos and captions.</li>
       <li>For friends: a <b>friend code</b>, your <b>nickname</b>, and a summary your accepted friends can see:
-        how Pip looks (including any companion Pip has found) and where Pip is on the route, postcards and medals, and today's and this week's steps
-        (you can turn steps off in Settings). Your trip journal is never shared with friends.</li>
+        how Pip looks (including any companion Pip has found) and where Pip is on the route, postcards and medals, and, only if you turn it on in Settings,
+        today's and this week's steps. Your trip journal is never shared with friends.</li>
+      <li>If friends' notifications are on, a <b>push token</b>: a random ID for the app on your phone, so news can
+        reach it. It's removed when you sign out, turn them off or delete your account.</li>
     </ul>
 
     <h2>Feedback you send</h2>
@@ -70,6 +74,8 @@
     <h2>Who handles the data</h2>
     <ul>
       <li><b>Supabase</b> hosts the accounts, backups, friends and feedback (our database provider).</li>
+      <li><b>Google Firebase Cloud Messaging</b> delivers friends' notifications. It receives your push token and
+        the text of the notification, such as a friend's nickname and a place name. It isn't given your steps or your email.</li>
       <li><b>Google</b> and <b>Apple</b> handle sign-in if you choose "Continue with Google" or "Continue with Apple".</li>
     </ul>
     <p>We don't sell your data, share it with advertisers or data brokers, or use it for advertising. There are
